@@ -1,0 +1,12 @@
+[
+{
+  "directory": "C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Tests",
+  "command": "C:\\MinGW\\bin\\g++.exe -Dtests_EXPORTS @CMakeFiles/tests.dir/includes_CXX.rsp -g -o CMakeFiles\\tests.dir\\Src\\testing.cpp.obj -c C:\\Users\\djrok\\Documents\\Cpp_Simple_UTesting\\Tests\\Src\\testing.cpp",
+  "file": "C:/Users/djrok/Documents/Cpp_Simple_UTesting/Tests/Src/testing.cpp"
+},
+{
+  "directory": "C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/runTests.dir/includes_CXX.rsp -g -o CMakeFiles\\runTests.dir\\main.cpp.obj -c C:\\Users\\djrok\\Documents\\Cpp_Simple_UTesting\\Src\\main.cpp",
+  "file": "C:/Users/djrok/Documents/Cpp_Simple_UTesting/Src/main.cpp"
+}
+]

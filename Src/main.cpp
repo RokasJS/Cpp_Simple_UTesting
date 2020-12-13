@@ -1,7 +1,8 @@
 #include <iostream>
+#include "testing.hpp"
 using namespace std;
 
 int main() {
-    cout << "Hello World!" << endl;
+    testing::test();
     return 0;
 }

@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/djrok/Documents/Cpp_Simple_UTesting/testing.cpp
+testing.hpp
+C:/Users/djrok/Documents/Cpp_Simple_UTesting/testing.hpp
+iostream
+-
+
+C:/Users/djrok/Documents/Cpp_Simple_UTesting/testing.hpp
+
