@@ -2,5 +2,5 @@
 #include <iostream>
 
 void testing::test(){
-    std::cout<<"Testing!!!\n";
+    std::cout<<"yes";
 }

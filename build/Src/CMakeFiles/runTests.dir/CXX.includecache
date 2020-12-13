@@ -6,3 +6,11 @@
 
 #IncludeRegexTransform: 
 
+../Tests/Src/testing.hpp
+
+C:/Users/djrok/Documents/Cpp_Simple_UTesting/Src/main.cpp
+iostream
+-
+testing.hpp
+C:/Users/djrok/Documents/Cpp_Simple_UTesting/Src/testing.hpp
+
