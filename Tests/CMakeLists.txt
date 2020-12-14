@@ -1,5 +1,5 @@
 add_library(
-    tests SHARED
+    tests
     Src/testing.cpp
     Src/testing.hpp
 )
