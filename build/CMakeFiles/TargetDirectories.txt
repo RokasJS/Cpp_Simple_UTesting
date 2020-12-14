@@ -1,8 +1,0 @@
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/CMakeFiles/edit_cache.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/CMakeFiles/rebuild_cache.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Tests/CMakeFiles/tests.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Tests/CMakeFiles/edit_cache.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Tests/CMakeFiles/rebuild_cache.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Src/CMakeFiles/runTests.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Src/CMakeFiles/edit_cache.dir
-C:/Users/djrok/Documents/Cpp_Simple_UTesting/build/Src/CMakeFiles/rebuild_cache.dir
