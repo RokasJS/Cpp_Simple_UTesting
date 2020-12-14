@@ -22,5 +22,4 @@ void TestBatch(test_result results[]){
     test_result results[test_number];
     TestBatch(results);
     ReportTests(results, test_number);
-    
   }
