@@ -1,4 +1,4 @@
 CMakeCache.txt
-.vscode
-build
-CMakeFile
+/.vscode
+/build
+/CMakeFile
