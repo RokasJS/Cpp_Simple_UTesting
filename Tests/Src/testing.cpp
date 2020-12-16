@@ -52,18 +52,18 @@ void addToList(res_list** head_ref, test_result data){
 void ReportTests(){
     res_list * head_pl = head;
     TestFramework Frame;
-    Frame.printOut((char*)"----------------------------\n");
-    Frame.printOut((char*)"        Test Report         \n");
-    Frame.printOut((char*)"----------------------------\n");
+    Frame.printOut("----------------------------\n");
+    Frame.printOut("        Test Report         \n");
+    Frame.printOut("----------------------------\n");
     while (head_pl != NULL){
         if (!head_pl->data.res) {
-            Frame.printOut((char*)"Test Failed in group: ");
+            Frame.printOut("Test Failed in group: ");
             Frame.printOut(head_pl->data.group); 
-            Frame.printOut((char*)" | name: ");
+            Frame.printOut(" | name: ");
             Frame.printOut(head_pl->data.name); 
-            Frame.printOut((char*)" | exact line: ");
+            Frame.printOut(" | exact line: ");
             Frame.printOut(head_pl->data.exact);
-            Frame.printOut((char*)"\n");
+            Frame.printOut("\n");
         }
         head_pl = head_pl->next;
     }
@@ -72,19 +72,4 @@ void ReportTests(){
 // Custom printout function
 void print(char * n){
     cout << n;
-}
-//-------------Various assert functions----------------
-
-// Check if a=b
-bool isEqual(int a, int b){
-    if (a == b)
-        return 1;
-    return 0;
-}
-
-// Check if a>b
-bool isMoreThan(int a, int b){
-    if (a > b)
-        return 1;
-    return 0;
 }
