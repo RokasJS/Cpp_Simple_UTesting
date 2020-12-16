@@ -5,9 +5,9 @@
 // Struct for holding test results
 struct test_result {
     bool res;
-    std::string group;
-    std::string name;
-    std::string exact;
+    char * group;
+    char * name;
+    char * exact;
   };
 
 // Linked list node class
@@ -18,7 +18,7 @@ class res_list {
 };
 
 // Macro function for every individual test
-void f_Test(bool chk, std::string exact, std::string group, std::string name);
+void f_Test(bool chk, char * exact, char * group, char * name);
 #define TEST(check, group, name)  \
 f_Test(check, #check, group, name)
 

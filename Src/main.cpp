@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <string>
 #include "testing.hpp"
 using namespace std;
 
@@ -19,6 +18,6 @@ void TestBatch(){
 }
 
 int main() {
-  TestBatch();
-  ReportTests();
+ TestBatch();
+ ReportTests();
 }

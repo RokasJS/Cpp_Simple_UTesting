@@ -2,12 +2,26 @@
 #include "testing.hpp"
 using namespace std;
 
+// Function prototypes
+void print(char *n);
+
 // Variables
 res_list * head = NULL;
 test_result results;
 
+// Classes
+class TestFramework {   // Test framework class
+public:
+    virtual void printOut(char * n) {
+        // Add custom print() function here
+        print(n);
+    } 
+};
+
+// Functions 
+
 // Function for reading and storing every test result
-void f_Test(bool eval, string exact, string group, string name) {
+void f_Test(bool eval, char * exact, char * group, char * name) {
     results.res = eval;
     results.group = group;
     results.name = name;
@@ -33,19 +47,32 @@ void addToList(res_list** head_ref, test_result data){
     return;
 
 }
+
 // Function for reporting all test results
 void ReportTests(){
     res_list * head_pl = head;
-    cout << "----------------------------" << endl;
-    cout << "        Test Report         " << endl;
-    cout << "----------------------------" << endl;
+    TestFramework Frame;
+    Frame.printOut((char*)"----------------------------\n");
+    Frame.printOut((char*)"        Test Report         \n");
+    Frame.printOut((char*)"----------------------------\n");
     while (head_pl != NULL){
-        if (!head_pl->data.res) 
-            cout << "Test Failed in group: " << head_pl->data.group << " | name: " << head_pl->data.name << " | exact line: " << head_pl->data.exact <<endl;
+        if (!head_pl->data.res) {
+            Frame.printOut((char*)"Test Failed in group: ");
+            Frame.printOut(head_pl->data.group); 
+            Frame.printOut((char*)" | name: ");
+            Frame.printOut(head_pl->data.name); 
+            Frame.printOut((char*)" | exact line: ");
+            Frame.printOut(head_pl->data.exact);
+            Frame.printOut((char*)"\n");
+        }
         head_pl = head_pl->next;
     }
 }
 
+// Custom printout function
+void print(char * n){
+    cout << n;
+}
 //-------------Various assert functions----------------
 
 // Check if a=b
