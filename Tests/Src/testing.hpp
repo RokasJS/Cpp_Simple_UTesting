@@ -10,17 +10,21 @@ struct test_result {
     std::string exact;
   };
 
-class Node {
+// Linked list node class
+class res_list {
   public:
     test_result data;
-    Node *next;
+    res_list *next;
 };
 
 // Macro function for every individual test
-void f_Test(bool chk, std::string exact, std::string group, std::string name, test_result& result);
-#define TEST(check, group, name, result)  \
-f_Test(check, #check, group, name, result)
-void addToList(Node** head_ref, test_result data);
+void f_Test(bool chk, std::string exact, std::string group, std::string name);
+#define TEST(check, group, name)  \
+f_Test(check, #check, group, name)
+
+// Function for appending to linked list
+void addToList(res_list** head_ref, test_result data);
+
 // Various assert functions
 bool isEqual(int a, int b);     // Checks if a=b
 bool isMoreThan(int a, int b);  // Checks if a>b
