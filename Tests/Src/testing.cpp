@@ -50,6 +50,10 @@ void addToList(res_list** head_ref, test_result data){
 
 // Function for reporting all test results
 void ReportTests(){
+    int correct_counter = 0;
+    int bad_counter = 0;
+    int ret;
+    char buff[20];
     res_list * head_pl = head;
     TestFramework Frame;
     Frame.printOut("----------------------------\n");
@@ -57,6 +61,7 @@ void ReportTests(){
     Frame.printOut("----------------------------\n");
     while (head_pl != NULL){
         if (!head_pl->data.res) {
+            bad_counter++;
             Frame.printOut("Test Failed in group: ");
             Frame.printOut(head_pl->data.group); 
             Frame.printOut(" | name: ");
@@ -65,8 +70,18 @@ void ReportTests(){
             Frame.printOut(head_pl->data.exact);
             Frame.printOut("\n");
         }
+        else
+            correct_counter++;
         head_pl = head_pl->next;
     }
+    Frame.printOut("----------------------------\n");
+    Frame.printOut("Passed tests: ");
+    ret = sprintf(buff, "%d", correct_counter);
+    Frame.printOut(buff);
+    Frame.printOut("\n");
+    Frame.printOut("Failed tests: ");
+    ret = sprintf(buff, "%d", bad_counter);
+    Frame.printOut(buff);
 }
 
 // Custom printout function
