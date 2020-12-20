@@ -1,12 +1,9 @@
-#include <iostream>
 #include "testing.hpp"
+#include "main.hpp"
 using namespace std;
 
-// Function prototypes
-void print(char *n);
-
 // Variables
-res_list * head = NULL;
+res_list * head = nullptr;
 test_result results;
 
 // Classes
@@ -19,6 +16,21 @@ public:
 };
 
 // Functions 
+
+// Convert int to char*
+char *convertChar(int number, char *buff)
+{
+    if (number / 10 == 0) {
+        *buff++ = number + '0';
+        *buff = '\0';
+        return buff;
+    }
+
+    buff = convertChar(number / 10, buff);
+    *buff++ = number % 10 + '0';
+    *buff = '\0';
+    return buff;
+}
 
 // Function for reading and storing every test result
 void f_Test(bool eval, char * exact, char * group, char * name) {
@@ -34,13 +46,13 @@ void addToList(res_list** head_ref, test_result data){
     res_list *new_node = new res_list();
     res_list *last = *head_ref;
     new_node->data = data;
-    new_node->next = NULL;
+    new_node->next = nullptr;
 
-    if(*head_ref == NULL){
+    if(*head_ref == nullptr){
         *head_ref = new_node;
         return;
     }
-    while (last->next != NULL)
+    while (last->next != nullptr)
         last = last->next;
 
     last->next = new_node;
@@ -59,7 +71,7 @@ void ReportTests(){
     Frame.printOut("----------------------------\n");
     Frame.printOut("        Test Report         \n");
     Frame.printOut("----------------------------\n");
-    while (head_pl != NULL){
+    while (head_pl != nullptr){
         if (!head_pl->data.res) {
             bad_counter++;
             Frame.printOut("Test Failed in group: ");
@@ -76,15 +88,11 @@ void ReportTests(){
     }
     Frame.printOut("----------------------------\n");
     Frame.printOut("Passed tests: ");
-    ret = sprintf(buff, "%d", correct_counter);
+    convertChar(correct_counter, buff);
     Frame.printOut(buff);
     Frame.printOut("\n");
     Frame.printOut("Failed tests: ");
-    ret = sprintf(buff, "%d", bad_counter);
+    convertChar(bad_counter, buff);
     Frame.printOut(buff);
 }
 
-// Custom printout function
-void print(char * n){
-    cout << n;
-}

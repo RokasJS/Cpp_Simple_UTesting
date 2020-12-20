@@ -1,14 +1,17 @@
 #include <iostream>
 #include <cmath>
+#include "main.hpp"
 #include "testing.hpp"
 using namespace std;
+
+// Function prototypes
+void print(char *n);
 
 // Math functions to test
 int Squared(int n) { return sqrt(n); } 
 int TwoToPower(int n) { return pow(2,n); }
 
 // Function for running a batch of tests
-
 // TEST(condition, group, name)
 void TestBatch(){
   TEST(Squared(16) == 4, "Squared Check", "Nr1");
@@ -17,6 +20,11 @@ void TestBatch(){
   TEST(TwoToPower(2) == 4, "TwoToPower Check", "Nr1");
   TEST(TwoToPower(3) == 8, "TwoToPower Check", "Nr2");
   TEST(TwoToPower(5) == 25, "TwoToPower Check", "Nr3");
+}
+
+// Custom printout function
+void print(char * n){
+    cout << n;
 }
 
 int main() {

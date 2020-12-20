@@ -1,6 +1,5 @@
 #ifndef TESTING_HPP_INCLUDED
 #define TESTING_HPP_INCLUDED
-#include <iostream>
 
 // Struct for holding test results
 struct test_result {
