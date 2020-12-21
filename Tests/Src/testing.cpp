@@ -14,23 +14,6 @@ public:
     } 
 };
 
-// Functions 
-
-// Convert int to char*
-char *convertChar(int number, char *buff)
-{
-    if (number / 10 == 0) {
-        *buff++ = number + '0';
-        *buff = '\0';
-        return buff;
-    }
-
-    buff = convertChar(number / 10, buff);
-    *buff++ = number % 10 + '0';
-    *buff = '\0';
-    return buff;
-}
-
 // Group class
 group::group(char * t)
 {
@@ -40,7 +23,6 @@ group::group(char * t)
 }
 void group::appendTo(test_result value) // Function for appending to link list
 {
-    
     node *temp=new node;
     temp->data=value;
     temp->next=nullptr;
@@ -92,17 +74,24 @@ void group::report()    //Function for reporting results
     Frame.printOut(buff);
     Frame.printOut("\n");
 }
-void group::f_Test(bool eval, char * exact){
+void group::f_Test(bool eval, char * exact){    // Function for reading and storing every test result
     test_result results;
     results.res = eval;
     results.exact = exact;
     appendTo(results);
 } 
 
-// Function for reading and storing every test result
-// void f_Test(bool eval, char * exact, group * groups) {
-//     test_result results;
-//     results.res = eval;
-//     results.exact = exact;
-//     groups->appendTo(results);
-// }
+// Convert int to char*
+char *convertChar(int number, char *buff)
+{
+    if (number / 10 == 0) {
+        *buff++ = number + '0';
+        *buff = '\0';
+        return buff;
+    }
+
+    buff = convertChar(number / 10, buff);
+    *buff++ = number % 10 + '0';
+    *buff = '\0';
+    return buff;
+}

@@ -1,6 +1,10 @@
 #ifndef TESTING_HPP_INCLUDED
 #define TESTING_HPP_INCLUDED
 using namespace std;
+
+// Int to char* conversion
+char * convertChar(int number, char *buff);
+
 // Struct for holding test results
 struct test_result {
     bool res;
@@ -15,6 +19,7 @@ struct node {
     node *next;
 };
 
+// Group class
 class group
 {
 	public:
@@ -26,20 +31,18 @@ class group
       void f_Test(bool eval, char * exact);
 };
 
-// Macro function for every individual test
-void f_Test(bool chk, char * exact, group * groups);
-
-#define NEW_GROUP(name) \
-group * name = new group(#name); \
+// Macros
+#define NEW_GROUP(name)           \
+group * name = new group(#name);  \
 
 
-#define TEST_G(name) \
-  void test__##name(void) \
-{     group * tmp = name;                     \
+#define TEST_G(name)              \
+  void test__##name(void)         \
+{     group * tmp = name;         \
 
 #define END }
 
-#define TEST(check)  \
+#define TEST(check)               \
   tmp->f_Test(check, #check);
 
 #endif
