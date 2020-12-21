@@ -14,19 +14,19 @@ int TwoToPower(int n) { return pow(2,n); }
 
 NEW_GROUP(Squared_Check);
 NEW_GROUP(Power_Check);
-// Function for running a batch of tests
-// TEST(condition, group, name)
 
+// Function for running a batch of tests
+// TEST(condition, group)
 TEST_G(Squared_Check){
-  TEST(Squared(16) == 4, point_Squared_Check);
-  TEST(Squared(16) == 5, point_Squared_Check);
-  TEST(Squared(64) == 8, point_Squared_Check);
+  TEST(Squared(16) == 4);
+  TEST(Squared(16) == 5);
+  TEST(Squared(64) == 9);
 }END
 
 TEST_G(Power_Check){
-  TEST(TwoToPower(3) == 8, point_Power_Check);
-  TEST(TwoToPower(3) == 9, point_Power_Check);
-  TEST(TwoToPower(3) == 10, point_Power_Check);
+  TEST(TwoToPower(3) == 8);
+  TEST(TwoToPower(3) == 9);
+  TEST(TwoToPower(4) == 16);
 }END
 
 
@@ -38,6 +38,8 @@ void print(char * n){
 int main() {
   test__Squared_Check();
   test__Power_Check();
-  group_Squared_Check.display();
-  group_Power_Check.display();
+  Squared_Check->report();
+  Power_Check->report();
+  //ReportTests(Squared_Check);
+  //ReportTests(Power_Check);
 }

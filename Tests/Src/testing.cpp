@@ -1,5 +1,5 @@
-#include <iostream>
 #include "testing.hpp"
+#include <iostream>
 #include "main.hpp"
 using namespace std;
 
@@ -31,102 +31,78 @@ char *convertChar(int number, char *buff)
     return buff;
 }
 
-
-
-// Function for appeding to the linked list
-// void addToList(res_list** head_ref, test_result data){
-//     res_list *new_node = new res_list();
-//     res_list *last = *head_ref;
-//     new_node->data = data;
-//     new_node->next = nullptr;
-
-//     if(*head_ref == nullptr){
-//         *head_ref = new_node;
-//         return;
-//     }
-//     while (last->next != nullptr)
-//         last = last->next;
-
-//     last->next = new_node;
-//     return;
-
-// }
-
-// list::list()
-// {
-//     head=nullptr;
-//     tail=nullptr;
-// }
-// void list::createnode(test_result value)
-// {
-//     node *temp=new node;
-//     temp->data=value;
-//     temp->next=nullptr;
-//     if(head==nullptr)
-//     {
-//         head=temp;
-//         tail=temp;
-//         temp=nullptr;
-//     }
-//     else
-//     {	
-//         tail->next=temp;
-//         tail=temp;
-//     }
-// }
-// void list::display()
-// {
-//     node *temp=new node;
-//     temp=head;
-//     cout<<"wtf1"<<endl;
-//     while(temp!=nullptr)
-//     {
-//         cout<<"wtf"<<endl;
-//         cout<<temp->data.exact<<"\n";
-//         temp=temp->next;
-//     }
-// }
-
-// Function for reading and storing every test result
-void f_Test(bool eval, char * exact, list * groups) {
+// Group class
+group::group(char * t)
+{
+    head=nullptr;
+    next=nullptr;
+    groupName = t;
+}
+void group::appendTo(test_result value) // Function for appending to link list
+{
+    
+    node *temp=new node;
+    temp->data=value;
+    temp->next=nullptr;
+    if(head==nullptr)
+    {
+        head=temp;
+        next=temp;
+        temp=nullptr;
+    }
+    else
+    {	
+        next->next=temp;
+        next=temp;
+    }
+}
+void group::report()    //Function for reporting results
+{
+    int correct_counter = 0;
+    int bad_counter = 0;
+    int ret;
+    char buff[20];
+    TestFramework Frame;
+    node *temp=new node;
+    temp=head;
+    Frame.printOut("----------------------------\n");
+    Frame.printOut("Group report: ");
+    Frame.printOut(groupName);
+    Frame.printOut("\n----------------------------\n");
+    while(temp!=nullptr)
+    {
+        if (!temp->data.res) {
+            bad_counter++;
+            Frame.printOut("Test Failed: "); 
+            Frame.printOut(temp->data.exact);
+            Frame.printOut("\n");
+        }
+        else
+            correct_counter++;
+        temp=temp->next;
+        
+    }
+    Frame.printOut("\n");
+    Frame.printOut("Passed tests: ");
+    convertChar(correct_counter, buff);
+    Frame.printOut(buff);
+    Frame.printOut("\n");
+    Frame.printOut("Failed tests: ");
+    convertChar(bad_counter, buff);
+    Frame.printOut(buff);
+    Frame.printOut("\n");
+}
+void group::f_Test(bool eval, char * exact){
     test_result results;
     results.res = eval;
     results.exact = exact;
-    groups->createnode(results);
-}
-// Function for reporting all test results
-// void ReportTests(res_list * group){
-//     int correct_counter = 0;
-//     int bad_counter = 0;
-//     int ret;
-//     char buff[20];
-//     res_list * head_pl = group;
-//     TestFramework Frame;
-//     Frame.printOut("----------------------------\n");
-//     Frame.printOut("        Test Report         \n");
-//     Frame.printOut("----------------------------\n");
-//     while (head_pl != nullptr){
-//         if (!head_pl->data.res) {
-//             bad_counter++;
-//             Frame.printOut("Test Failed in group: ");
-//             Frame.printOut(head_pl->data.group); 
-//             Frame.printOut(" | name: ");
-//             Frame.printOut(head_pl->data.name); 
-//             Frame.printOut(" | exact line: ");
-//             Frame.printOut(head_pl->data.exact);
-//             Frame.printOut("\n");
-//         }
-//         else
-//             correct_counter++;
-//         head_pl = head_pl->next;
-//     }
-//     Frame.printOut("----------------------------\n");
-//     Frame.printOut("Passed tests: ");
-//     convertChar(correct_counter, buff);
-//     Frame.printOut(buff);
-//     Frame.printOut("\n");
-//     Frame.printOut("Failed tests: ");
-//     convertChar(bad_counter, buff);
-//     Frame.printOut(buff);
-// }
+    appendTo(results);
+} 
 
+// Function for reading and storing every test result
+// void f_Test(bool eval, char * exact, group * groups) {
+//     test_result results;
+//     results.res = eval;
+//     results.exact = exact;
+//     groups->appendTo(results);
+// }
