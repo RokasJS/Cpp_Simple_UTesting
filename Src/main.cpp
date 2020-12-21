@@ -7,20 +7,28 @@ using namespace std;
 // Function prototypes
 void print(char *n);
 
+// res_list * TwoToPower_Check = nullptr;
 // Math functions to test
 int Squared(int n) { return sqrt(n); } 
 int TwoToPower(int n) { return pow(2,n); }
 
+NEW_GROUP(Squared_Check);
+NEW_GROUP(Power_Check);
 // Function for running a batch of tests
 // TEST(condition, group, name)
-void TestBatch(){
-  TEST(Squared(16) == 4, "Squared Check", "Nr1");
-  TEST(Squared(16) == 5, "Squared Check", "Nr2");
-  TEST(Squared(64) == 8, "Squared Check", "Nr3");
-  TEST(TwoToPower(2) == 4, "TwoToPower Check", "Nr1");
-  TEST(TwoToPower(3) == 8, "TwoToPower Check", "Nr2");
-  TEST(TwoToPower(5) == 25, "TwoToPower Check", "Nr3");
-}
+
+TEST_G(Squared_Check){
+  TEST(Squared(16) == 4, point_Squared_Check);
+  TEST(Squared(16) == 5, point_Squared_Check);
+  TEST(Squared(64) == 8, point_Squared_Check);
+}END
+
+TEST_G(Power_Check){
+  TEST(TwoToPower(3) == 8, point_Power_Check);
+  TEST(TwoToPower(3) == 9, point_Power_Check);
+  TEST(TwoToPower(3) == 10, point_Power_Check);
+}END
+
 
 // Custom printout function
 void print(char * n){
@@ -28,6 +36,8 @@ void print(char * n){
 }
 
 int main() {
- TestBatch();
- ReportTests();
+  test__Squared_Check();
+  test__Power_Check();
+  group_Squared_Check.display();
+  group_Power_Check.display();
 }
