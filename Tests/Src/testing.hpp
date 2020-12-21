@@ -4,7 +4,7 @@ using namespace std;
 
 // Int to char* conversion
 char * convertChar(int number, char *buff);
-
+extern int groupCounter;
 // Struct for holding test results
 struct test_result {
     bool res;
@@ -44,5 +44,8 @@ group * name = new group(#name);  \
 
 #define TEST(check)               \
   tmp->f_Test(check, #check);
+
+#define REPORT(name)  \
+  name->report();
 
 #endif

@@ -4,7 +4,7 @@
 using namespace std;
 
 // Variables
-
+int groupCounter;
 // Classes
 class TestFramework {   // Test framework class
 public:
@@ -17,6 +17,7 @@ public:
 // Group class
 group::group(char * t)
 {
+    groupCounter++;
     head=nullptr;
     next=nullptr;
     groupName = t;

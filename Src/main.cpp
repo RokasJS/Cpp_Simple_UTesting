@@ -38,8 +38,7 @@ void print(char * n){
 int main() {
   test__Squared_Check();
   test__Power_Check();
-  Squared_Check->report();
-  Power_Check->report();
-  //ReportTests(Squared_Check);
-  //ReportTests(Power_Check);
+  REPORT(Squared_Check);
+  REPORT(Power_Check);
+  cout<<groupCounter;
 }
