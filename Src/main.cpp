@@ -2,10 +2,9 @@
 #include <cmath>
 #include "main.hpp"
 #include "testing.hpp"
-using namespace std;
 
 // Custom printout function
-void print(const char * n){ cout << n; }
+void print(const char * n){ std::cout << n; }
 
 // Math functions for testing
 int Squared(int n) { return sqrt(n); } 
@@ -50,8 +49,9 @@ void self_test(){
 // Main function
 int main() {
   self_test();
-  REPORT(Squared_Check);
-  REPORT(Power_Check);
-  REPORT(Addition_Check);
-  REPORT(Subtraction_Check);
+  REPORT_ALL;
+  // REPORT(Squared_Check);
+  // REPORT(Power_Check);
+  // REPORT(Addition_Check);
+  // REPORT(Subtraction_Check);
 }

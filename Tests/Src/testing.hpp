@@ -1,16 +1,12 @@
 #ifndef TESTING_HPP_INCLUDED
 #define TESTING_HPP_INCLUDED
 
-//--------------Variables--------------
-// Group counter
-extern int groupCounter;
-
 //---------Function Prototypes---------
 // Int to char* conversion
 char * convertChar(int number, char *buff);   
-
+void report_all();
 //---------------Structs---------------
-// Holds temporary test results
+// Hold temporary test results
 struct test_result {    
     bool res;
     const char * group;
@@ -25,8 +21,9 @@ struct node {
 
 //---------------Classes---------------
 // Group class
-class group {           
+class group {  
 	public:
+    static int groupCounter; 
 		node *head, *next;
 		const char * groupName;
 	  group(const char * t);
@@ -35,12 +32,14 @@ class group {
     void f_Test(bool eval, const char * exact);
 };
 
+// Allow for outside char * output functions
 class TestFramework { 
 public:
     virtual void printOut(const char* n);
 };
+
 //----------------Macros----------------
-// Spawns new group class instance 
+// Spawn new group class instance 
 #define NEW_GROUP(name)             \
 group * name = new group(#name);        
 
@@ -51,23 +50,27 @@ group * name = new group(#name);
   bool test_##name(void)            \
 { USING_GROUP(name)    
 
-// Creates temporary pointer to class 
+// Create temporary pointer to class 
 #define USING_GROUP(name)           \
   group * tmp = name;   
 
-// Changes temporary pointer to class
+// Change temporary pointer to class
 #define CHANGE_GROUP(name)          \
   tmp = name;  
 
 // Required for test group body
 #define END return 0; } 
 
-// Assertion macro, checks if condition is true 
+// Check if condition is true 
 #define TEST(check)                 \
   tmp->f_Test(check, #check);
 
-// Reports group results
+// Report group results
 #define REPORT(name)                \
   name->report();
+
+// Report all results
+#define REPORT_ALL                  \
+  report_all();
 
 #endif

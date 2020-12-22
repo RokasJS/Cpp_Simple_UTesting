@@ -1,10 +1,12 @@
 #include "testing.hpp"
 #include "main.hpp"
+#include <vector> 
 
-// -----------------Variables-----------------
-int groupCounter, callCounter;
+//----------------Variables------------------
+// Vector for holding pointers to new group instances
+std::vector<group *> groupPointers; 
 
-// ---------------Class methods---------------
+//---------------Class methods---------------
 // Allows for outside char * output functions
 void TestFramework::printOut(const char* n) {
     // Add custom print() function here
@@ -14,10 +16,10 @@ void TestFramework::printOut(const char* n) {
 // New group creation function
 group::group(const char * t)
 {
-    groupCounter++;
+    groupPointers.push_back(this);
+    groupName = t;
     head=nullptr;
     next=nullptr;
-    groupName = t;
 }
 
 // Append test result data to groups linked list
@@ -64,7 +66,6 @@ void group::report()
         else
             correct_counter++;
         temp=temp->next;
-        
     }
     Frame.printOut("\n");
     Frame.printOut("Passed tests: ");
@@ -98,4 +99,10 @@ char *convertChar(int number, char *buff)
     *buff++ = number % 10 + '0';
     *buff = '\0';
     return buff;
+}
+
+// Report all results
+void report_all(){
+    for (int i = 0; i < groupPointers.size(); i++) 
+        groupPointers.at(i)->report(); 
 }
