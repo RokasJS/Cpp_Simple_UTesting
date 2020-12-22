@@ -1,28 +1,27 @@
 #include "testing.hpp"
-#include <iostream>
 #include "main.hpp"
-using namespace std;
 
-// Variables
-int groupCounter;
-// Classes
-class TestFramework {   // Test framework class
-public:
-    virtual void printOut(char * n) {
-        // Add custom print() function here
-        print(n);
-    } 
-};
+// -----------------Variables-----------------
+int groupCounter, callCounter;
 
-// Group class
-group::group(char * t)
+// ---------------Class methods---------------
+// Allows for outside char * output functions
+void TestFramework::printOut(const char* n) {
+    // Add custom print() function here
+    print(n);
+} 
+
+// New group creation function
+group::group(const char * t)
 {
     groupCounter++;
     head=nullptr;
     next=nullptr;
     groupName = t;
 }
-void group::appendTo(test_result value) // Function for appending to link list
+
+// Append test result data to groups linked list
+void group::appendTo(test_result value)
 {
     node *temp=new node;
     temp->data=value;
@@ -39,7 +38,9 @@ void group::appendTo(test_result value) // Function for appending to link list
         next=temp;
     }
 }
-void group::report()    //Function for reporting results
+
+// Report group results
+void group::report() 
 {
     int correct_counter = 0;
     int bad_counter = 0;
@@ -75,14 +76,17 @@ void group::report()    //Function for reporting results
     Frame.printOut(buff);
     Frame.printOut("\n");
 }
-void group::f_Test(bool eval, char * exact){    // Function for reading and storing every test result
+
+// Read and store every test result in group
+void group::f_Test(bool eval, const char * exact){
     test_result results;
     results.res = eval;
     results.exact = exact;
     appendTo(results);
 } 
 
-// Convert int to char*
+//----------------Functions------------------
+// Int to char* conversion
 char *convertChar(int number, char *buff)
 {
     if (number / 10 == 0) {
@@ -90,7 +94,6 @@ char *convertChar(int number, char *buff)
         *buff = '\0';
         return buff;
     }
-
     buff = convertChar(number / 10, buff);
     *buff++ = number % 10 + '0';
     *buff = '\0';

@@ -1,51 +1,73 @@
 #ifndef TESTING_HPP_INCLUDED
 #define TESTING_HPP_INCLUDED
-using namespace std;
 
-// Int to char* conversion
-char * convertChar(int number, char *buff);
+//--------------Variables--------------
+// Group counter
 extern int groupCounter;
-// Struct for holding test results
-struct test_result {
+
+//---------Function Prototypes---------
+// Int to char* conversion
+char * convertChar(int number, char *buff);   
+
+//---------------Structs---------------
+// Holds temporary test results
+struct test_result {    
     bool res;
-    char * group;
-    char * name;
-    char * exact;
+    const char * group;
+    const char * exact;
   };
 
-// Linked list node class
-struct node {
+// Linked list node 
+struct node {           
     test_result data;
     node *next;
 };
 
+//---------------Classes---------------
 // Group class
-class group
-{
+class group {           
 	public:
 		node *head, *next;
-		char * groupName;
-	  	group(char * t);
-	  	void appendTo(test_result value);
-	  	void report();
-      void f_Test(bool eval, char * exact);
+		const char * groupName;
+	  group(const char * t);
+	  void appendTo(test_result value);
+	  void report();
+    void f_Test(bool eval, const char * exact);
 };
 
-// Macros
-#define NEW_GROUP(name)           \
-group * name = new group(#name);  \
+class TestFramework { 
+public:
+    virtual void printOut(const char* n);
+};
+//----------------Macros----------------
+// Spawns new group class instance 
+#define NEW_GROUP(name)             \
+group * name = new group(#name);        
 
+// Test group body
+#define TEST_G(name)                \
+  bool test_##name(void);           \
+  bool var_##name = test_##name();  \
+  bool test_##name(void)            \
+{ USING_GROUP(name)    
 
-#define TEST_G(name)              \
-  void test__##name(void)         \
-{     group * tmp = name;         \
+// Creates temporary pointer to class 
+#define USING_GROUP(name)           \
+  group * tmp = name;   
 
-#define END }
+// Changes temporary pointer to class
+#define CHANGE_GROUP(name)          \
+  tmp = name;  
 
-#define TEST(check)               \
+// Required for test group body
+#define END return 0; } 
+
+// Assertion macro, checks if condition is true 
+#define TEST(check)                 \
   tmp->f_Test(check, #check);
 
-#define REPORT(name)  \
+// Reports group results
+#define REPORT(name)                \
   name->report();
 
 #endif
