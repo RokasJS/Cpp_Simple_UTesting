@@ -3,7 +3,7 @@
 
 //---------Function Prototypes---------
 // Int to char* conversion
-char * convertChar(int number, char *buff);   
+char * convertChar(int number, char *buff); 
 void report_all();
 //---------------Structs---------------
 // Hold temporary test results
@@ -13,21 +13,45 @@ struct test_result {
     const char * exact;
   };
 
-// Linked list node 
-struct node {           
-    test_result data;
-    node *next;
+// Generic linked list node for results 
+template<class T>
+struct node {
+	node<T>* next;
+	T data;
 };
 
 //---------------Classes---------------
-// Group class
-class group {  
+// Parent generic linked list class
+template<class T>
+class LList {
+  public:
+    node<T>* head;
+    node<T>* next;
+    LList<T>() {
+      head = nullptr;
+      next = nullptr;
+    }
+    void appendTo(T data) {
+      node<T>* temp=new node<T>;
+      temp->data=data;
+      temp->next=nullptr;
+      if(head==nullptr) {
+          head=temp;
+          next=temp;
+          temp=nullptr;
+      }
+      else {	
+          next->next=temp;
+          next=temp;
+      }
+    }
+};
+
+// Group child class
+class group: public LList<test_result>{  
 	public:
-    static int groupCounter; 
-		node *head, *next;
 		const char * groupName;
 	  group(const char * t);
-	  void appendTo(test_result value);
 	  void report();
     void f_Test(bool eval, const char * exact);
 };

@@ -32,8 +32,8 @@ TEST_G(Power_Check){
   TEST(TwoToPower(4) == 16);
 }END
 
-// Self-Test function
-void self_test(){
+// Random function
+void random_test(){
   // Use 3rd group
   USING_GROUP(Addition_Check);
   TEST(Addition(1,1) == 2);
@@ -48,10 +48,10 @@ void self_test(){
 
 // Main function
 int main() {
-  self_test();
+  random_test();
   REPORT_ALL;
-  // REPORT(Squared_Check);
-  // REPORT(Power_Check);
+  //REPORT(Squared_Check);
+  //REPORT(Power_Check);
   // REPORT(Addition_Check);
   // REPORT(Subtraction_Check);
 }
