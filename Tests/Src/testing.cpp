@@ -2,7 +2,7 @@
 #include "main.hpp"
 
 //----------------Variables------------------
-LList<group*> groupCounter;
+group * firstGroup; // Pointer to first group
 //---------------Class methods---------------
 // Allows for outside char * output functions
 void TestFramework::printOut(const char* n) {
@@ -11,16 +11,15 @@ void TestFramework::printOut(const char* n) {
 } 
 
 // New group creation function
-group::group(const char * t) {
-    groupCounter.appendTo(this);
-    groupName = t;
+group::group(const char * t){
+	addToGroupList(this);
+	groupName = t;
 }
 
 // Report group results
 void group::report(){
     int correct_counter = 0;
     int bad_counter = 0;
-    int ret;
     char buff[20];
     TestFramework Frame;
     node<test_result> *temp=new node<test_result>;
@@ -59,7 +58,6 @@ void group::f_Test(bool eval, const char * exact){
     results.exact = exact;
     appendTo(results);
 } 
-
 //----------------Functions------------------
 // Int to char* conversion
 char *convertChar(int number, char *buff){
@@ -74,12 +72,27 @@ char *convertChar(int number, char *buff){
     return buff;
 }
 
+// Adds new group pointer to last group
+void addToGroupList(group * n){
+	group* temp;
+	temp=firstGroup;
+	if(firstGroup==nullptr){
+	   	firstGroup=n;
+	   	firstGroup->nextG=nullptr;
+	}
+	else{
+	   	while(temp->nextG != nullptr)
+	   		temp=temp->nextG;
+	   	temp->nextG = n;
+	   	n->nextG = nullptr;
+	}
+}
+
 // Report all results
 void report_all(){
-    node<group*>* temp = new node<group*>;
-    temp=groupCounter.head;
+    group* temp = firstGroup;
     while(temp!=nullptr){
-        temp->data->report();
-        temp=temp->next;
+        temp->report();
+        temp=temp->nextG;
     }
 }

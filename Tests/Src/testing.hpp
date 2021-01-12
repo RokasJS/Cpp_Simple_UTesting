@@ -3,7 +3,7 @@
 
 //---------Function Prototypes---------
 // Int to char* conversion
-char * convertChar(int number, char *buff); 
+char * convertChar(int number, char *buff);
 void report_all();
 //---------------Structs---------------
 // Hold temporary test results
@@ -13,7 +13,7 @@ struct test_result {
     const char * exact;
   };
 
-// Generic linked list node for results 
+// Generic linked list node
 template<class T>
 struct node {
 	node<T>* next;
@@ -31,7 +31,16 @@ class LList {
       head = nullptr;
       next = nullptr;
     }
-    void appendTo(T data) {
+    ~LList<T>(){
+    	node<T>* current = head;
+    	while( current != 0 ) {
+    		node<T>* next = current->next;
+    	    delete current;
+    	    current = next;
+    	}
+    	head = 0;
+    }
+    virtual void appendTo(T data) {
       node<T>* temp=new node<T>;
       temp->data=data;
       temp->next=nullptr;
@@ -40,7 +49,7 @@ class LList {
           next=temp;
           temp=nullptr;
       }
-      else {	
+      else {
           next->next=temp;
           next=temp;
       }
@@ -48,13 +57,18 @@ class LList {
 };
 
 // Group child class
-class group: public LList<test_result>{  
+class group: public LList<test_result>{
 	public:
-		const char * groupName;
 	  group(const char * t);
+	  const char * groupName;
+	  group* nextG;
 	  void report();
-    void f_Test(bool eval, const char * exact);
+	  void f_Test(bool eval, const char * exact);
 };
+
+// Required for listing all groups
+extern group* firstGroup;
+void addToGroupList(group * n);
 
 // Allow for outside char * output functions
 class TestFramework { 
@@ -65,7 +79,8 @@ public:
 //----------------Macros----------------
 // Spawn new group class instance 
 #define NEW_GROUP(name)             \
-group * name = new group(#name);        
+group * name = new group(#name);    \
+//groupCounter.appendTo(name);
 
 // Test group body
 #define TEST_G(name)                \
